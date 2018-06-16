@@ -47,7 +47,7 @@ private:
 	int cPitSelect;
 	int auraSelect;
 
-	dArr<int> controls;
+	dArr<int> ctrls;
 	Vector2f currentVelocity;
 	float maxVelocity;
 	float acceleration;

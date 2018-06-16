@@ -122,7 +122,8 @@ void Game::initTextures()
 void Game::initMenues()
 {
 	//Init main menu
-	this->mainMenu.initialize(this->window->getSize());
+	sf::Vector2<unsigned int> tmp = this->window->getSize();
+	this->mainMenu.initialize(tmp);
 
 	//Init in-game menu
 }

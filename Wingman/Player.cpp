@@ -231,17 +231,17 @@ Player::Player(
 
 	//Controls
 	//FOLLOW CONTROLS ENUM TEMPLATE!
-	this->controls.add(int(UP));
-	this->controls.add(int(DOWN));
-	this->controls.add(int(LEFT));
-	this->controls.add(int(RIGHT));
-	this->controls.add(int(SHOOT));
-	this->controls.add(int(SHIELD));
-	this->controls.add(int(STATS));
-	this->controls.add(int(CHANGE_LWING));
-	this->controls.add(int(CHANGE_CPIT));
-	this->controls.add(int(CHANGE_RWING));
-	this->controls.add(int(CHANGE_AURA));
+	this->ctrls.add(int(UP));
+	this->ctrls.add(int(DOWN));
+	this->ctrls.add(int(LEFT));
+	this->ctrls.add(int(RIGHT));
+	this->ctrls.add(int(SHOOT));
+	this->ctrls.add(int(SHIELD));
+	this->ctrls.add(int(STATS));
+	this->ctrls.add(int(CHANGE_LWING));
+	this->ctrls.add(int(CHANGE_CPIT));
+	this->ctrls.add(int(CHANGE_RWING));
+	this->ctrls.add(int(CHANGE_AURA));
 
 	//Velocity & Acceleration
 	this->maxVelocity = 25.f;
@@ -363,7 +363,7 @@ void Player::changeAccessories(const float &dt)
 	if (this->keyTime < this->keyTimeMax)
 		this->keyTime += 1.f * dt * this->dtMultiplier;
 
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[CHANGE_LWING])) && this->keyTime >= this->keyTimeMax)
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[CHANGE_LWING])) && this->keyTime >= this->keyTimeMax)
 	{
 		if (lWingSelect < Player::lWingTextures.size() - 1)
 			lWingSelect++;
@@ -375,7 +375,7 @@ void Player::changeAccessories(const float &dt)
 		this->keyTime = 0;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[CHANGE_RWING])) && this->keyTime >= this->keyTimeMax)
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[CHANGE_RWING])) && this->keyTime >= this->keyTimeMax)
 	{
 		if (rWingSelect < Player::rWingTextures.size() - 1)
 			rWingSelect++;
@@ -387,7 +387,7 @@ void Player::changeAccessories(const float &dt)
 		this->keyTime = 0;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[CHANGE_CPIT])) && this->keyTime >= this->keyTimeMax)
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[CHANGE_CPIT])) && this->keyTime >= this->keyTimeMax)
 	{
 		if (cPitSelect < Player::cPitTextures.size() - 1)
 			cPitSelect++;
@@ -399,7 +399,7 @@ void Player::changeAccessories(const float &dt)
 		this->keyTime = 0;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[CHANGE_AURA])) && this->keyTime >= this->keyTimeMax)
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[CHANGE_AURA])) && this->keyTime >= this->keyTimeMax)
 	{
 		if (auraSelect < Player::auraTextures.size() - 1)
 			auraSelect++;
@@ -477,7 +477,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	this->normDir = normalize(this->currentVelocity, vectorLength(this->currentVelocity));
 
 	//UP
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::UP])))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[controls::UP])))
 	{
 		this->direction.x = 0.f;
 		this->direction.y = -1.f;
@@ -488,7 +488,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	}
 	
 	//DOWN
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::DOWN])))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[controls::DOWN])))
 	{ 
 		this->direction.x = 0.f;
 		this->direction.y = 1.f;
@@ -499,7 +499,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	}
 	
 	//LEFT
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::LEFT])))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[controls::LEFT])))
 	{ 
 		this->direction.x = -1.f;
 		this->direction.y = 0.f;
@@ -511,7 +511,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	}
 	
 	//RIGHT
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::RIGHT])))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[controls::RIGHT])))
 	{ 
 		this->direction.x = 1.f;
 		this->direction.y = 0.f;
@@ -597,7 +597,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 
 void Player::combat(const float &dt)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::SHOOT]))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[controls::SHOOT]))
 		&& this->shootTimer >= this->shootTimerMax)
 	{
 		if (this->currentWeapon == Player::LASER_NORMAL)
@@ -734,7 +734,7 @@ void Player::combat(const float &dt)
 	}
 
 	//SHIELDING
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::SHIELD])) && this->shield)
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[controls::SHIELD])) && this->shield)
 	{
 		if (this->shieldTimer > 0 && this->shieldRechargeTimer >= this->shieldRechargeTimerMax)
 		{
@@ -849,7 +849,7 @@ void Player:: upgradeHP()
 
 bool Player::playerShowStatsIsPressed()
 {
-	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::STATS])))
+	if (Keyboard::isKeyPressed(Keyboard::Key(this->ctrls[controls::STATS])))
 		return true;
 
 	return false;
